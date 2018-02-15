@@ -1,0 +1,177 @@
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="com.yourapp.developer.expensivemanager.Fragment.AddExpensiveFragment.handler"></variable>
+
+    </data>
+    <LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- Login progress -->
+
+    <ScrollView
+        android:id="@+id/add_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_input_layout"
+                android:layout_marginTop="@dimen/edit_text_height">
+
+                <EditText
+                    android:id="@+id/expensive"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:backgroundTint="@color/editTextSelected"
+                    android:hint="@string/prompt_fullname"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHighlight="@color/textHintColor"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/money_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prompt_cash"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    />
+
+                <RadioButton
+                    android:id="@+id/credit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prompt_credit"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    />
+
+                <RadioButton
+                    android:id="@+id/dedit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:text="@string/prompt_saving" />
+
+                <RadioButton
+                    android:id="@+id/internet_banking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:text="@string/prompt_internet" />
+            </RadioGroup>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_input_layout"
+                android:layout_marginTop="@dimen/edit_text_height">
+
+                <EditText
+                    android:id="@+id/to_whom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:backgroundTint="@color/editTextSelected"
+                    android:hint="@string/prompt_towhom"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHighlight="@color/textHintColor"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_input_layout"
+                android:layout_marginTop="@dimen/edit_text_height">
+
+                <EditText
+                    android:id="@+id/for_what"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:backgroundTint="@color/editTextSelected"
+                    android:hint="@string/prompt_forwhat"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHighlight="@color/textHintColor"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height_notes"
+                android:layout_marginTop="@dimen/edit_text_height">
+
+                <EditText
+                    android:id="@+id/note"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_height_notes"
+                    android:backgroundTint="@color/editTextSelected"
+                    android:hint="@string/prompt_note"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHighlight="@color/textHintColor"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/save_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_gap"
+                android:background="@drawable/button_outline"
+                android:text="@string/action_save"
+                android:onClick="@{handler::addOnclick}"
+                android:textColor="@color/textColorWhite"
+                android:textSize="@dimen/font_size_hint"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+</layout>
