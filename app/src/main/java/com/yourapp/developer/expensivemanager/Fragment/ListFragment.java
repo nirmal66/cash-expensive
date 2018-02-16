@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,20 @@ import com.yourapp.developer.expensivemanager.Adapter.ExpensiveAdapter;
 import com.yourapp.developer.expensivemanager.Database.AdddbModel;
 import com.yourapp.developer.expensivemanager.R;
 import com.yourapp.developer.expensivemanager.Utilities.BaseFragment;
+import com.yourapp.developer.expensivemanager.Utilities.OnClickInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ListFragment extends BaseFragment {
+public class ListFragment extends BaseFragment implements OnClickInterface{
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     List<AdddbModel> model = new ArrayList<AdddbModel>();
+    private int i;
+    private AdddbModel adddbModel;
 
     @Nullable
     @Override
@@ -41,17 +45,29 @@ public class ListFragment extends BaseFragment {
         new DatabaseAsync().execute();
     }
 
+    @Override
+    public void onItemClick(AdddbModel model) {
+        Log.d("delete","testing:"+model.getTowhom());
+        i=1;
+        adddbModel = model;
+        new DatabaseAsync().execute();
+    }
+
     private class DatabaseAsync extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            mAdapter = new ExpensiveAdapter(model);
+            mAdapter = new ExpensiveAdapter(model,ListFragment.this);
             mRecyclerView.setAdapter(mAdapter);
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
+            if (i==1)
+            {
+                db.epensiveDAO().delete(adddbModel);
+            }
             model =  db.epensiveDAO().getAll();
             return null;
         }

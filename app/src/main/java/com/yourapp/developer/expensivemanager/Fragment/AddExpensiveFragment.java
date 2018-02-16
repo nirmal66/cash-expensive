@@ -26,7 +26,8 @@ public class AddExpensiveFragment extends BaseFragment {
     FragmentAddExpensiveBinding binding;
     private RadioButton amountType;
     private String dateTime;
-    Date yourDate;
+    private Date yourDate;
+    private Boolean validate;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,21 +42,38 @@ public class AddExpensiveFragment extends BaseFragment {
     {
         public void addOnclick(View view)
         {
-            int selectedId=binding.moneyType.getCheckedRadioButtonId();
-            amountType=(RadioButton)getView().findViewById(selectedId);
-            DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
-            dateTime = df.format(Calendar.getInstance().getTime());
-            try {
-                yourDate = df.parse(dateTime);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if(validate = Validate()) {
+                int selectedId = binding.moneyType.getCheckedRadioButtonId();
+                amountType = (RadioButton) getView().findViewById(selectedId);
+                DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+                dateTime = df.format(Calendar.getInstance().getTime());
+                try {
+                    yourDate = df.parse(dateTime);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Snackbar.make(view, "Do not worry!!! you can save something by next time :)", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                new DatabaseAsync().execute();
             }
-            Snackbar.make(view, "Do not worry!!! you can save something by next time :)", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            new DatabaseAsync().execute();
         }
     }
 
+    private Boolean Validate()
+    {
+
+        if(binding.expensive.getText().length()==0)
+        {
+            binding.expensive.setError("Enter your expensive");
+            return false;
+        }
+        if(binding.toWhom.getText().length()==0)
+        {
+            binding.toWhom.setError("Enter toWhom");
+            return false;
+        }
+        return true;
+    }
     private class DatabaseAsync extends AsyncTask<Void, Void, Void> {
 
         @Override

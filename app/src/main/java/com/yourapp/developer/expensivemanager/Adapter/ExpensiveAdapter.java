@@ -1,13 +1,16 @@
 package com.yourapp.developer.expensivemanager.Adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.yourapp.developer.expensivemanager.Database.AdddbModel;
 import com.yourapp.developer.expensivemanager.R;
+import com.yourapp.developer.expensivemanager.Utilities.OnClickInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +23,19 @@ public class ExpensiveAdapter extends RecyclerView.Adapter<ExpensiveAdapter.Cust
 
 private List<AdddbModel> notificationLists = new ArrayList<AdddbModel>();
 
-    public ExpensiveAdapter(List<AdddbModel> mnotificationLists) {
+
+    private OnClickInterface mClickInterface;
+
+    public ExpensiveAdapter(List<AdddbModel> mnotificationLists, OnClickInterface ClickInterface) {
 
         this.notificationLists = mnotificationLists;
+        this.mClickInterface = ClickInterface;
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder{
 
         TextView expensive,towhom,type,date,forwhat,note;
+        Button delete;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -37,6 +45,7 @@ private List<AdddbModel> notificationLists = new ArrayList<AdddbModel>();
             date = (TextView)itemView.findViewById(R.id.text_date);
             forwhat  = (TextView)itemView.findViewById(R.id.text_for_what);
             note = (TextView)itemView.findViewById(R.id.text_note);
+            delete = (Button)itemView.findViewById(R.id.delete);
         }
     }
 
@@ -50,7 +59,7 @@ private List<AdddbModel> notificationLists = new ArrayList<AdddbModel>();
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, int position) {
+    public void onBindViewHolder(CustomViewHolder holder, final int position) {
         holder.expensive.setText(notificationLists.get(position).getExpense().toString());
         holder.towhom.setText(notificationLists.get(position).getTowhom().toString());
         holder.type.setText(notificationLists.get(position).getMoneyType().toString());
@@ -58,7 +67,13 @@ private List<AdddbModel> notificationLists = new ArrayList<AdddbModel>();
         holder.forwhat.setText(notificationLists.get(position).getForwhat().toString());
         holder.note.setText(notificationLists.get(position).getNote().toString());
 
-
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mClickInterface.onItemClick(notificationLists.get(position));
+                Log.d("test for delete click", "onClick: "+notificationLists.get(position).getId());
+            }
+        });
     }
 
     @Override
