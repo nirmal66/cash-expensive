@@ -50,7 +50,7 @@ public class AddExpensiveFragment extends BaseFragment {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            Snackbar.make(view, "Do not worry!!! you can save something by next time:(", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Do not worry!!! you can save something by next time :)", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             new DatabaseAsync().execute();
         }

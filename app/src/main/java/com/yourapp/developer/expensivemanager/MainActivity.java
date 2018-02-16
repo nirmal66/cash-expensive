@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 fragment(new AddExpensiveFragment(), "ContactFragment");
 
-                Snackbar.make(view, "Add your Expensive :(", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Add your Expensive :)", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
