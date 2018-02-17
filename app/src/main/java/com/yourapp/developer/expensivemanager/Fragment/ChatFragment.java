@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -41,10 +42,12 @@ public class ChatFragment extends Fragment {
         mChart.setFitBars(true);
         mChart.animateY(2500);
 
-        xl = mChart.getXAxis();
-        xl.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xl.setDrawAxisLine(true);
-        xl.setDrawGridLines(false);
+         xl = mChart.getXAxis();
+         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
+         xl.setDrawAxisLine(true);
+         xl.setDrawGridLines(false);
+        xl.setGranularity(10f);
+
         // Set the value formatter
 
 
@@ -59,6 +62,13 @@ public class ChatFragment extends Fragment {
         yr.setAxisMinimum(0f); // this replaces setStartAtZero(true)
 
 
+        Legend l = mChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setFormSize(8f);
+        l.setXEntrySpace(4f);
       new DatabaseAsync().execute();
     }
 
@@ -78,7 +88,12 @@ public class ChatFragment extends Fragment {
         BarDataSet set = new BarDataSet(entries, "Your Expensive: "+ value);
         BarData data = new BarData(set);
         data.setBarWidth(0.9f); // set custom bar width
-        mChart.setData(data);
+
+        try {
+            mChart.setData(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mChart.setFitBars(true); // make the x-axis fit exactly all bars
         mChart.invalidate(); // refresh
     }
