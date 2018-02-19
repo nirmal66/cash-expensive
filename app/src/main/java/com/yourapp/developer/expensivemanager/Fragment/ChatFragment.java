@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class ChatFragment extends Fragment {
          xl.setPosition(XAxis.XAxisPosition.BOTTOM);
          xl.setDrawAxisLine(true);
          xl.setDrawGridLines(false);
-        xl.setGranularity(10f);
+         xl.setGranularity(1f);
 
         // Set the value formatter
 
@@ -62,13 +63,6 @@ public class ChatFragment extends Fragment {
         yr.setAxisMinimum(0f); // this replaces setStartAtZero(true)
 
 
-        Legend l = mChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setFormSize(8f);
-        l.setXEntrySpace(4f);
       new DatabaseAsync().execute();
     }
 
@@ -79,6 +73,7 @@ public class ChatFragment extends Fragment {
         List<String> weekdays = new ArrayList<>();
         for (int i = 0; i < model.size(); i++) {
             weekdays.add(model.get(i).getTowhom());
+            Log.d("x value",model.get(i).getTowhom());
             entries.add(new BarEntry(i, Integer.parseInt(model.get(i).getExpense())));
             value  +=  Integer.parseInt(model.get(i).getExpense());
         }
@@ -94,7 +89,7 @@ public class ChatFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mChart.setFitBars(true); // make the x-axis fit exactly all bars
+        //mChart.setFitBars(true); // make the x-axis fit exactly all bars
         mChart.invalidate(); // refresh
     }
 

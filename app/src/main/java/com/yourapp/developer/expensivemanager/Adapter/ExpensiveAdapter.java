@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yourapp.developer.expensivemanager.Database.AdddbModel;
@@ -35,7 +36,7 @@ private List<AdddbModel> notificationLists = new ArrayList<AdddbModel>();
     public class CustomViewHolder extends RecyclerView.ViewHolder{
 
         TextView expensive,towhom,type,date,forwhat,note;
-        Button delete;
+        ImageView delete;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -45,7 +46,7 @@ private List<AdddbModel> notificationLists = new ArrayList<AdddbModel>();
             date = (TextView)itemView.findViewById(R.id.text_date);
             forwhat  = (TextView)itemView.findViewById(R.id.text_for_what);
             note = (TextView)itemView.findViewById(R.id.text_note);
-            delete = (Button)itemView.findViewById(R.id.delete);
+            delete = (ImageView)itemView.findViewById(R.id.delete);
         }
     }
 
