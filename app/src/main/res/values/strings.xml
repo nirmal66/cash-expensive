@@ -7,8 +7,10 @@
     <string name="action_settings">Settings</string>
     <string name="action_send">SEND</string>
     <string name="action_save">SAVE</string>
+    <string name="action_calculator">Calculator</string>
+    <string name="action_check">Check my apps</string>
     <string name="prompt_fullname">Enter your Expensive</string>
-    <string name="prompt_towhom">To Whom</string>
+    <string name="prompt_towhom">Whom</string>
     <string name="prompt_forwhat">For What</string>
     <string name="prompt_note">Note</string>
     <string name="prompt_cash">Cash</string>

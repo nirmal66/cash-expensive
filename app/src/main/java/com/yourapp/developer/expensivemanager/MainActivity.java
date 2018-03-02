@@ -1,5 +1,9 @@
 package com.yourapp.developer.expensivemanager;
 
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,14 +19,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.yourapp.developer.expensivemanager.Database.AdddbModel;
 import com.yourapp.developer.expensivemanager.Fragment.AddExpensiveFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ChatFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ContactFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ListFragment;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private String tag;
+    android.support.v4.app.FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +52,7 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -59,18 +69,25 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
 
-            String tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
-            //Toast.makeText(this,tag,Toast.LENGTH_LONG).show();
-            if (tag.equals("ListFragment")) {
-                finish();
-            }
-            else {
-                if (getFragmentManager().getBackStackEntryCount() > 0) {
-                    getFragmentManager().popBackStack();
+            String tag = null;
+            try {
+                tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
+                if (tag.equals("ListFragment")) {
+                    finish();
                 } else {
-                    super.onBackPressed();
+                    if (getFragmentManager().getBackStackEntryCount() > 0) {
+                        getFragmentManager().popBackStack();
+                    } else {
+                        super.onBackPressed();
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                super.onBackPressed();
+
             }
+            //Toast.makeText(this,tag,Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -78,7 +95,42 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_home) {
+            ArrayList<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
+
+            final PackageManager pm = getPackageManager();
+            List<PackageInfo> packs = pm.getInstalledPackages(0);
+            for (PackageInfo pi : packs) {
+                if (pi.packageName.toString().toLowerCase().contains("calcul")) {
+                    HashMap<String, Object> map = new HashMap<String, Object>();
+                    map.put("appName", pi.applicationInfo.loadLabel(pm));
+                    map.put("packageName", pi.packageName);
+                    items.add(map);
+                }
+            }
+
+            if (items.size() >= 1) {
+                String packageName = (String) items.get(0).get("packageName");
+                Intent i = pm.getLaunchIntentForPackage(packageName);
+                if (i != null)
+                    startActivity(i);
+            } else {
+                // Application not found
+            }
+        }
+
+        if(id == R.id.action_check)
+        {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Yourapp&hl=en\n")));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -148,7 +200,7 @@ public class MainActivity extends AppCompatActivity
 
     public void fragment(Fragment fragment, String transaction) {
         tag = transaction;
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_transaction, fragment, transaction);
         fragmentTransaction.addToBackStack(transaction);
         fragmentTransaction.commit();

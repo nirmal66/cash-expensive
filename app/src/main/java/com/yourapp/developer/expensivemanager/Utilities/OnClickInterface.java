@@ -9,4 +9,5 @@ import com.yourapp.developer.expensivemanager.Database.AdddbModel;
 public interface  OnClickInterface {
 
     void onItemClick(AdddbModel model);
+    void onUpdateClick(AdddbModel model);
 }

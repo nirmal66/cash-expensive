@@ -71,7 +71,7 @@ private List<AdddbModel> notificationLists = new ArrayList<AdddbModel>();
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mClickInterface.onItemClick(notificationLists.get(position));
+                mClickInterface.onUpdateClick(notificationLists.get(position));
                 Log.d("test for delete click", "onClick: "+notificationLists.get(position).getId());
             }
         });

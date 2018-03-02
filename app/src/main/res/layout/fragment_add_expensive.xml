@@ -65,6 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/prompt_cash"
+                    android:checked="true"
                     android:textColorHint="@color/textHintColor"
                     android:textSize="@dimen/font_size"
                     />
