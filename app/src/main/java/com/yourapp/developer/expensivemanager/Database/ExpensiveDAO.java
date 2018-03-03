@@ -25,5 +25,7 @@ public interface ExpensiveDAO {
     void delete(AdddbModel adddbModel);
     @Update
     void update(AdddbModel adddbModel);
+    @Query("select * from adddbmodel where money_format like :format")
+    List<AdddbModel> getAllLend(String format);
 
 }

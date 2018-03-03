@@ -21,6 +21,7 @@ import android.view.View;
 
 import com.yourapp.developer.expensivemanager.Database.AdddbModel;
 import com.yourapp.developer.expensivemanager.Fragment.AddExpensiveFragment;
+import com.yourapp.developer.expensivemanager.Fragment.ChatBorrowFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ChatFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ContactFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ListFragment;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity
             final PackageManager pm = getPackageManager();
             List<PackageInfo> packs = pm.getInstalledPackages(0);
             for (PackageInfo pi : packs) {
-                if (pi.packageName.toString().toLowerCase().contains("calcul")) {
+                if (pi.packageName.toLowerCase().contains("calcul")) {
                     HashMap<String, Object> map = new HashMap<String, Object>();
                     map.put("appName", pi.applicationInfo.loadLabel(pm));
                     map.put("packageName", pi.packageName);
@@ -145,7 +146,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_chart) {
             fragment(new ChatFragment(), "ChatFragment");
         }
-
+        if (id == R.id.nav_borrow_chart) {
+            fragment(new ChatBorrowFragment(), "ChatFragment");
+        }
         if (id == R.id.nav_home) {
             fragment(new ListFragment(), "ListFragment");
         }

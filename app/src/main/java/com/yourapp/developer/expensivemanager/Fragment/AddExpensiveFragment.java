@@ -30,10 +30,9 @@ import java.util.Date;
 
 public class AddExpensiveFragment extends BaseFragment {
     private FragmentAddExpensiveBinding binding;
-    private RadioButton amountType;
+    private RadioButton amountType, moneyType;
     private String dateTime;
     private Date yourDate;
-    private Boolean validate;
     private AdddbModel Model;
     private int i;
 
@@ -44,22 +43,30 @@ public class AddExpensiveFragment extends BaseFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_expensive, container, false);
         binding.setHandler(new handler());
         if (i == 1) {
-            Log.d("updte success", Model.getTowhom());
-            binding.expensive.setText(Model.getExpense());
-            binding.note.setText(Model.getNote());
-            binding.toWhom.setText(Model.getTowhom());
-            binding.forWhat.setText(Model.getForwhat());
-            if (Model.getMoneyType().equals("Cash")) {
-                binding.moneyType.check(R.id.cash);
-            }
-            if (Model.getMoneyType().equals("Credit Card")) {
-                binding.moneyType.check(R.id.credit);
-            }
-            if (Model.getMoneyType().equals("Debit Card")) {
-                binding.moneyType.check(R.id.dedit);
-            }
-            if (Model.getMoneyType().equals("Bank")) {
-                binding.moneyType.check(R.id.internet_banking);
+            try {
+                //Log.d("updte success", Model.getFormat());
+                binding.expensive.setText(Model.getExpense());
+                binding.note.setText(Model.getNote());
+                binding.toWhom.setText(Model.getTowhom());
+                binding.forWhat.setText(Model.getForwhat());
+                if (Model.getMoneyType().equals("Cash")) {
+                    binding.moneyType.check(R.id.cash);
+                }
+                if (Model.getMoneyType().equals("Credit Card")) {
+                    binding.moneyType.check(R.id.credit);
+                }
+                if (Model.getMoneyType().equals("Debit Card")) {
+                    binding.moneyType.check(R.id.dedit);
+                }
+                if (Model.getMoneyType().equals("Bank")) {
+                    binding.moneyType.check(R.id.internet_banking);
+                }
+                if (Model.getFormat().equals("Lend")) {
+                    binding.cashMethod.check(R.id.lend);
+                } else
+                    binding.cashMethod.check(R.id.borrow);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return binding.getRoot();
@@ -70,7 +77,7 @@ public class AddExpensiveFragment extends BaseFragment {
         public void addOnclick(View view) {
 
 
-            if (validate = Validate()) {
+            if (Validate()) {
 
                 // Check if no view has focus:
                 View hideView = getActivity().getCurrentFocus();
@@ -79,7 +86,9 @@ public class AddExpensiveFragment extends BaseFragment {
                     imm.hideSoftInputFromWindow(hideView.getWindowToken(), 0);
                 }
                 int selectedId = binding.moneyType.getCheckedRadioButtonId();
+                int moneyid = binding.cashMethod.getCheckedRadioButtonId();
                 amountType = (RadioButton) getView().findViewById(selectedId);
+                moneyType = (RadioButton) getView().findViewById(moneyid);
                 DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
                 dateTime = df.format(Calendar.getInstance().getTime());
                 try {
@@ -116,6 +125,7 @@ public class AddExpensiveFragment extends BaseFragment {
             AdddbModel add = new AdddbModel();
             add.setExpense(binding.expensive.getText().toString());
             add.setMoneyType(amountType.getText().toString());
+            add.setFormat(moneyType.getText().toString());
             add.setYear(calendar.get(Calendar.YEAR) + "");
             SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
             String month_name = month_date.format(calendar.getTime());

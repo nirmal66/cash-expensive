@@ -9,7 +9,7 @@
 
     <item
         android:id="@+id/action_home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/calc"
         android:title="@string/action_calculator"
         app:showAsAction="always" />
 

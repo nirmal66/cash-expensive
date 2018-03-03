@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -25,7 +24,7 @@ import java.util.List;
 
 import static com.yourapp.developer.expensivemanager.Utilities.BaseFragment.db;
 
-public class ChatFragment extends Fragment {
+public class ChatBorrowFragment extends Fragment {
 
     protected HorizontalBarChart mChart;
     List<AdddbModel> model = new ArrayList<AdddbModel>();
@@ -109,7 +108,7 @@ public class ChatFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            model = db.epensiveDAO().getAllLend("Lend");
+            model = db.epensiveDAO().getAllLend("Borrow");
             return null;
         }
     }

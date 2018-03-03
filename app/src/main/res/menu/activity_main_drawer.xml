@@ -17,7 +17,11 @@
         <item
             android:id="@+id/nav_chart"
             android:icon="@drawable/chart"
-            android:title="Chart" />
+            android:title="Lend Chart" />
+        <item
+            android:id="@+id/nav_borrow_chart"
+            android:icon="@drawable/chart"
+            android:title="Borrow Chart" />
     </group>
 
     <item android:title="Communicate">

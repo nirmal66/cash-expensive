@@ -27,6 +27,8 @@ public class AdddbModel {
     private String Towhom;
     @ColumnInfo(name = "for_what")
     private String Forwhat;
+    @ColumnInfo(name = "money_format")
+    private String format;
 
     public String getMonth() {
         return month;
@@ -99,4 +101,13 @@ public class AdddbModel {
     public void setForwhat(String forwhat) {
         Forwhat = forwhat;
     }
+
+   public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
 }

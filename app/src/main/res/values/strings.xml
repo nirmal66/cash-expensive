@@ -17,6 +17,8 @@
     <string name="prompt_credit">Credit Card</string>
     <string name="prompt_saving">Debit Card</string>
     <string name="prompt_internet">Bank</string>
+    <string name="prompt_lend">Lend</string>
+    <string name="prompt_borrow">Borrow</string>
     <string name="text_expense">Your Expense:</string>
     <string name="text_method">Type:</string>
     <string name="text_date">Date:</string>
