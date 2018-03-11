@@ -23,6 +23,7 @@ import com.yourapp.developer.expensivemanager.Database.AdddbModel;
 import com.yourapp.developer.expensivemanager.Fragment.AddExpensiveFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ChatBorrowFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ChatFragment;
+import com.yourapp.developer.expensivemanager.Fragment.ChatLendBorrowFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ContactFragment;
 import com.yourapp.developer.expensivemanager.Fragment.ListFragment;
 
@@ -152,7 +153,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             fragment(new ListFragment(), "ListFragment");
         }
-
+        if (id == R.id.nav_lend_borrow_chart) {
+            fragment(new ChatLendBorrowFragment(), "ChatFragment");
+        }
       /*  if(id==R.id.nav_backup)
         {
             File fileBackup = new File(Environment

@@ -22,6 +22,10 @@
             android:id="@+id/nav_borrow_chart"
             android:icon="@drawable/chart"
             android:title="Borrow Chart" />
+        <item
+            android:id="@+id/nav_lend_borrow_chart"
+            android:icon="@drawable/chart"
+            android:title="Lend/Borrow Chart" />
     </group>
 
     <item android:title="Communicate">
